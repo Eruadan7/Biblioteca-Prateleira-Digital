@@ -1,7 +1,15 @@
 USE BIBLIOTECA;
 
-INSERT INTO Biblioteca(nome_biblioteca)
-VALUES('Prateleira Digital');
+INSERT INTO Endereco (tipo_endereco, endereco, complemento, bairro, cidade, estado, cep, observacao, relacionamento_entidade) 
+VALUES 
+('Comercial', '123 Rua Principal', 'Apto 101', 'Centro', 'Cidade A', 'Estado A', '12345678', 'Próximo ao mercado', 'Biblioteca'),
+('Resedencial', '456 Avenida Secundária', NULL, 'Centro', 'Cidade B', 'Estado B', '87654321', 'Próximo à estação de metrô', 'Cliente'),
+('Resedencial', '456 Avenida Terciária', NULL, 'Centro', 'Cidade C', 'Estado B', '87654321', 'Próximo à estação de trem', 'Cliente'),
+('Residencial', '789 Rua da Praça', NULL, 'Bairro X', 'Cidade C', 'Estado C', '54321678', NULL, 'Cliente');
+;
+
+INSERT INTO Biblioteca(nome_biblioteca, id_endereco)
+VALUES('Prateleira Digital', 1);
 
 INSERT INTO Livro(id_biblioteca, nome_livro, valor_locacao_unidade, data_publicacao, quantidade_disponivel)
 VALUES(1, 'OS Lusíadas', 10.00, '1572.03.12', 3),
@@ -71,21 +79,27 @@ VALUES(1, 1),
 (4, 4),
 (5, 5);
 
-INSERT INTO Cliente(id_biblioteca, nome_cliente, cpf, data_nascimento)
-VALUES(1, 'Sócrates', '00000000000', '2001.01.01'),
-(1, 'Platão', '00000000001', '2002.02.02'),
-(1, 'Aristóteles', '00000000002', '2003.03.03');
+INSERT INTO Cliente(id_biblioteca, id_endereco, nome_cliente, cpf, data_nascimento, email_cliente, telefone_cliente)
+VALUES(1, 2, 'Sócrates', '00000000000', '2001.01.01', 'socrates@gmail.com', '08000080'),
+(1, 3, 'Platão', '00000000001', '2002.02.02', NULL, NULL),
+(1, 3, 'João da Silva', '00000000004', '2002.02.02', NULL, NULL),
+(1, 4, 'Aristóteles', '00000000002', '2003.03.03', NULL, '40028922');
 
 
-INSERT INTO Locacao(id_cliente, quantidade_livros_locados, valor_total_locacao, data_locacao, data_devolucao) 
-VALUES(1, 1, 10.00, '2024.03.25', '2024.04.05'),
-(2, 1, 10.00, '2024.03.25', '2024.04.05'),
-(3, 1, 10.00, '2024.03.25', '2024.04.05');
+INSERT INTO Locacao(id_cliente, quantidade_livros_locados, valor_total_locacao, data_locacao, data_devolucao, status) 
+VALUES(1, 1, 10.00, '2024.04.22', '2024.05.05', 'em andamento'),
+(1, 1, 10.00, '2024.03.25', '2024.04.05', 'finalizada'),
+(2, 1, 10.00, '2024.03.25', '2024.04.05', 'finalizada'),
+(3, 1, 10.00, '2024.03.25', '2024.04.05', 'finalizada');
 
 INSERT INTO LivroLocado(id_livro, id_locacao, condicao) 
 VALUES(1, 1, 'devolvido'),
+(2, 1, 'locado'),
 (2, 2, 'locado'),
 (3, 3, 'perdido');
+
+INSERT INTO LivroLocado(id_livro, id_locacao, condicao) 
+VALUES(2, 1, 'devolvido');
 
 INSERT INTO Multa(id_livro_locado, perdido, danificado, atrasado)
 VALUES(1, 00.00, 30.00, 00.00),

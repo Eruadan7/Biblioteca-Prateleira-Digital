@@ -58,6 +58,7 @@ CREATE TABLE ImagemIlustrativa(
 
 CREATE TABLE Biblioteca(
     id_biblioteca INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    id_endereco INTEGER NOT NULL,
     nome_biblioteca VARCHAR(50) NOT NULL
 );
 
@@ -81,6 +82,7 @@ CREATE TABLE LivroLocado(
 CREATE TABLE Locacao(
     id_locacao INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,
     id_cliente INTEGER NOT NULL,
+    status VARCHAR(50) NOT NULL,
     quantidade_livros_locados INTEGER NOT NULL,
     valor_total_locacao FLOAT(6,2) NOT NULL,
     data_locacao DATE NOT NULL,
@@ -90,10 +92,28 @@ CREATE TABLE Locacao(
 CREATE TABLE Cliente(
     id_cliente INTEGER NOT NULL PRIMARY KEY AUTO_INCREMENT,   
     id_biblioteca INTEGER NOT NULL,
+    id_endereco INTEGER NOT NULL,
     nome_cliente VARCHAR(100) NOT NULL,
     cpf VARCHAR(14) NOT NULL,
-    data_nascimento DATE
+    data_nascimento DATE,
+    email_cliente VARCHAR(1000),
+    telefone_cliente VARCHAR(11)
 );
+
+CREATE TABLE Endereco (
+    id_endereco INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    tipo_endereco VARCHAR(100) NOT NULL,
+    endereco VARCHAR(1000) NOT NULL,
+    complemento VARCHAR(100),
+    bairro VARCHAR(100) NOT NULL,
+    cidade VARCHAR(100) NOT NULL,
+    estado VARCHAR(30) NOT NULL,
+    cep VARCHAR(8) NOT NULL,
+    observacao VARCHAR(100),
+    relacionamento_entidade VARCHAR(50) NOT NULL
+
+);
+
 
 CREATE TABLE Multa(
     id_livro_locado INTEGER NOT NULL,
