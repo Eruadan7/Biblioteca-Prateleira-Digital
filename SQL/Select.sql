@@ -1,3 +1,5 @@
+-- Código feito por Gabriel de Lima Andrade
+
 USE BIBLIOTECA;
 
 select nome_cliente, data_nascimento from Cliente where nome_cliente like "%te%";
